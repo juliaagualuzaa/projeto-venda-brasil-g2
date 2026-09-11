@@ -1,83 +1,94 @@
 
 # Dashboard Executivo de Vendas no Brasil
 
-## 1. Descrição do projeto
+## 1. Descricao do projeto
 
-Este projeto apresenta uma análise executiva de vendas no Brasil com foco em receita, lucro, margem de lucro, ticket médio, canais de venda, categorias de produto e distribuição geográfica por UF.
+Este projeto apresenta uma **analise executiva completa** de vendas no Brasil, cobrindo todo o pipeline de dados: desde a importacao dos dados brutos ate a publicacao de um dashboard interativo.
 
-O projeto foi desenvolvido como referência para a avaliação G2 da disciplina **Linguagem de Programação — Análise e Visualização de Dados com Python**.
+O projeto foi desenvolvido como avaliacao G2 da disciplina **Linguagem de Programacao — Analise e Visualizacao de Dados com Python**.
 
-A proposta é demonstrar um fluxo completo de projeto analítico:
+### Fluxo do Projeto
 
-1. entendimento do problema;
-2. leitura e preparação dos dados;
-3. criação de KPIs;
-4. análise exploratória;
-5. visualização de dados;
-6. persistência em banco SQLite com SQLAlchemy;
-7. construção de dashboard interativo com Streamlit;
-8. publicação em repositório GitHub;
-9. disponibilização do dashboard online.
+```
+vendas_brasil.csv (dados brutos)
+    ↓ Limpeza (pandas)
+vendas_brasil_clean.csv (dados tratados)
+    ↓ Persistencia (SQLAlchemy)
+vendas.db (banco SQLite)
+    ↓ Dashboard (Streamlit)
+app_dashboard.py (aplicacao web)
+    ↓ Deploy
+Streamlit Cloud (online)
+```
 
 ---
 
-## 2. Problema de negócio
+## 2. Problema de negocio
 
-Uma empresa de varejo que atua em diferentes estados, canais e categorias precisa responder às seguintes perguntas:
+Uma empresa de varejo que atua em diferentes estados, canais e categorias precisa responder:
 
-- Qual é a receita total do negócio?
-- Qual é o lucro total?
-- Qual é a margem de lucro?
+- Qual e a receita total do negocio?
+- Qual e o lucro total?
+- Qual e a margem de lucro?
 - Qual canal gera mais receita?
 - Qual canal apresenta melhor margem?
-- Quais categorias têm melhor desempenho?
+- Quais categorias tem melhor desempenho?
 - Quais UFs concentram maior receita?
-- Há variação temporal relevante nas vendas?
+- Ha variacao temporal relevante nas vendas?
 
 ---
 
 ## 3. Tecnologias utilizadas
 
-- Python
-- Pandas
-- Matplotlib
-- Seaborn
-- Streamlit
-- SQLAlchemy
-- SQLite
-- GitHub
+| Tecnologia | Funcao |
+|------------|--------|
+| Python | Linguagem principal |
+| pandas | Manipulacao e analise de dados |
+| matplotlib | Visualizacao estatica |
+| seaborn | Visualizacao estatistica |
+| plotly | Visualizacao interativa |
+| SQLAlchemy | Conexao com banco de dados |
+| SQLite | Persistencia de dados |
+| Streamlit | Dashboard interativo |
+| Git/GitHub | Versionamento |
 
 ---
 
 ## 4. Estrutura do projeto
 
 ```text
-projeto_venda_brasil_g2/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-├── dados/
-│   └── vendas_brasil.csv
-├── database/
-│   └── vendas_brasil.sqlite
-├── notebooks/
-│   └── analise_venda_brasil.ipynb
-└── imagens/
+projeto-venda-brasil-g2/
+|
+|-- README.md                    # Este arquivo
+|-- requirements.txt             # Dependencias
+|-- app.py                       # App Streamlit (avaliacao G2)
+|-- app_dashboard.py             # Dashboard completo (projeto integrador)
+|
+|-- dados/
+|   |-- vendas_brasil.csv        # Dados brutos (2.500 registros)
+|
+|-- database/
+|   |-- vendas_brasil.sqlite     # Banco SQLite
+|
+|-- notebooks/
+|   |-- analise_venda_brasil.ipynb     # Notebook da avaliacao G2
+|   |-- projeto_integrador.ipynb        # Notebook completo (12 aulas)
+|
+|-- imagens/
 ```
 
 ---
 
 ## 5. Como executar localmente
 
-### 5.1 Clonar o repositório
+### 5.1 Clonar o repositorio
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
-cd projeto_venda_brasil_g2
+git clone https://github.com/AlexandreLouzada/projeto-venda-brasil-g2.git
+cd projeto-venda-brasil-g2
 ```
 
-### 5.2 Instalar dependências
+### 5.2 Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
@@ -86,67 +97,99 @@ pip install -r requirements.txt
 ### 5.3 Executar o dashboard
 
 ```bash
+# Dashboard da avaliacao G2
 streamlit run app.py
+
+# Dashboard completo (projeto integrador)
+streamlit run app_dashboard.py
+```
+
+### 5.4 Executar o notebook
+
+```bash
+# Abrir no Jupyter/VSCode e executar celula por celula
+jupyter notebook notebooks/projeto_integrador.ipynb
 ```
 
 ---
 
 ## 6. KPIs utilizados
 
-| KPI | Descrição |
-|---|---|
+| KPI | Descricao |
+|-----|-----------|
 | Receita Total | Soma da receita das vendas |
 | Lucro Total | Soma do lucro das vendas |
-| Margem de Lucro | Lucro total dividido pela receita total |
-| Ticket Médio | Receita total dividida pela quantidade vendida |
+| Margem de Lucro % | Lucro total dividido pela receita total |
+| Ticket Medio | Receita media por transacao |
 | Itens Vendidos | Soma da quantidade de produtos vendidos |
 
 ---
 
 ## 7. Funcionalidades do dashboard
 
-O dashboard possui:
+### Dashboard G2 (`app.py`)
 
-- filtros por UF;
-- filtros por canal;
-- filtros por categoria;
-- filtros por segmento;
-- filtro por período;
-- KPIs dinâmicos;
-- gráficos de evolução temporal;
-- gráficos por canal;
-- gráficos por categoria;
-- gráficos por UF;
-- consulta SQL demonstrativa;
-- tabela interativa dos dados filtrados.
+- Filtros por UF, canal, categoria e segmento
+- KPIs dinamicos
+- Graficos de evolucao temporal
+- Consulta SQL demonstrativa
+- Tabela interativa dos dados filtrados
+
+### Dashboard Completo (`app_dashboard.py`)
+
+- Filtros por UF, canal, categoria e periodo
+- 4 KPIs no topo com metricas
+- Graficos Plotly interativos (linhas, barras, scatter, pizza)
+- Tabela de dados com download CSV
+- Storytelling analitico com insights
 
 ---
 
-## 8. Principais insights esperados
+## 8. Projeto Integrador — Notebook Completo
+
+O notebook `projeto_integrador.ipynb` cobre as **12 aulas** da disciplina:
+
+| Secao | Aula | Biblioteca | Conteudo |
+|-------|------|------------|----------|
+| 1. Introducao e Setup | Aula 1 | pandas | Pipeline de dados, importacao |
+| 2. Exploracao Inicial | Aula 2 | pandas | shape, info, selecao, filtragem |
+| 3. Limpeza e Preparacao | Aula 3 | pandas | Tipos, nulos, feature engineering |
+| 4. KPIs e Indicadores | Aula 4 | pandas | Metricas de negocio, groupby |
+| 5. Visualizacao Estatica | Aula 5 | matplotlib/seaborn | Barras, linhas, boxplot, heatmap |
+| 6. Visualizacao Interativa | Aula 6 | plotly | Graficos dinamicos com tooltips |
+| 7. SQL + Python | Aula 7 | sqlalchemy | Tabelas Fato/Dimensao, consultas |
+| 8-9. Dashboard Streamlit | Aulas 8-9 | streamlit | App com sidebar, KPIs, storytelling |
+| 10. Git e Portfolio | Aula 10 | git | Versionamento, README |
+| 11. Deploy | Aula 11 | streamlit cloud | Publicacao na web |
+| 12. Pitch Analitico | Aula 12 | markdown | Resumo executivo |
+
+---
+
+## 9. Principais insights esperados
 
 O projeto permite identificar:
 
-- canais mais relevantes para receita;
-- canais com melhor rentabilidade;
-- categorias mais importantes;
-- estados com maior concentração de vendas;
-- variações temporais de receita e lucro;
-- diferenças entre volume financeiro e eficiência operacional.
+- Canais mais relevantes para receita
+- Canais com melhor rentabilidade
+- Categorias mais importantes
+- Estados com maior concentracao de vendas
+- Variacoes temporais de receita e lucro
+- Diferencas entre volume financeiro e eficiencia operacional
 
 ---
 
-## 9. Publicação
+## 10. Publicacao
 
-O projeto pode ser publicado usando:
-
-- GitHub para versionamento e portfólio;
-- Streamlit Community Cloud para disponibilizar o dashboard;
-- GitHub Pages para documentação do projeto.
+| Etapa | Ferramenta | Status |
+|-------|------------|--------|
+| Versionamento | GitHub | Concluido |
+| Dashboard G2 | Streamlit Cloud | Pendente |
+| Dashboard Completo | Streamlit Cloud | Pendente |
 
 ---
 
-## 10. Objetivo pedagógico
+## 11. Objetivo pedagogico
 
-Este projeto demonstra aos alunos como transformar uma base de dados em um produto analítico completo.
+Este projeto demonstra aos alunos como transformar uma base de dados em um produto analitico completo.
 
-O foco não está apenas em gerar gráficos, mas em responder perguntas de negócio e apoiar a tomada de decisão.
+O foco nao esta apenas em gerar graficos, mas em responder perguntas de negocio e apoiar a tomada de decisao.
