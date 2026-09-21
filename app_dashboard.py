@@ -20,7 +20,7 @@ st.set_page_config(
 # ============================================================
 @st.cache_data
 def carregar_dados():
-   df = pd.read_csv("dados/vendas_brasil_clean.csv")
+    df = pd.read_csv("dados/vendas_brasil_clean.csv")
     df["data"] = pd.to_datetime(df["data"])
     return df
 
